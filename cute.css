@@ -1,0 +1,72 @@
+/* Cute extra styles: floating, twinkles, petals */
+
+/* floating and hover are gentle complements to the base styles */
+@keyframes float-sway {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-1.2vmin) rotate(-2deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+@keyframes twinkle {
+  0%,100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.28); opacity: 1; }
+}
+@keyframes petal-fall {
+  0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+@keyframes petal-pop {
+  0% { transform: scale(0.2) translateY(0); opacity: 0; }
+  60% { opacity: 1; transform: scale(1.05) translateY(-2vmin); }
+  100% { opacity: 1; transform: translateY(-4vmin) scale(0.95); }
+}
+
+.flower {
+  transition: transform 300ms ease, filter 300ms ease, box-shadow 300ms ease;
+}
+.flower:hover {
+  transform: translateY(-0.8vmin) scale(1.06);
+  filter: drop-shadow(0 0.6vmin rgba(0,0,0,0.08));
+}
+
+/* Ensure flowers have a subtle float in addition to existing animations */
+.flower--1, .flower--2, .flower--3 {
+  animation: float-sway 6s ease-in-out infinite;
+}
+
+/* small twinkle on lights */
+.flower__light {
+  animation: light-ans 4s linear infinite backwards, twinkle 3.2s ease-in-out infinite;
+}
+.flower__light:nth-child(even) { animation-delay: 0.6s; }
+
+/* Petal element for drops */
+.petal {
+  position: fixed;
+  pointer-events: none;
+  width: 0.9vmin;
+  height: 1.4vmin;
+  border-radius: 60% 40% 70% 30%/55% 45% 55% 45%;
+  background-image: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)), linear-gradient(180deg, var(--rose-petal-2), var(--rose-petal-1));
+  transform-origin: center;
+  z-index: 3000;
+  will-change: transform, opacity;
+  animation: petal-fall var(--duration, 6s) linear forwards;
+}
+.petal.pop {
+  animation: petal-pop 700ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+/* small sweet label (optional) */
+.rosey-label {
+  position: absolute;
+  top: 1.2vmin;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #b71c1c;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: rgba(255,255,255,0.6);
+  padding: 0.4vmin 1vmin;
+  border-radius: 6px;
+  font-size: 1.1vmin;
+  box-shadow: 0 0.2vmin 0.6vmin rgba(0,0,0,0.06);
+}

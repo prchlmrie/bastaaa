@@ -1,0 +1,352 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* Custom font: place `royalbrand.otf` in the `assets/` folder */
+@font-face {
+  font-family: 'RoyalBrand';
+  src: url('assets/royalbrand.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Tip: change the sizes for the bouquet text below on `.bouquet-text` and `.bouquet-message` */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+body {
+  height: 100vh;
+  /* no global image; slides control their own backgrounds (intro/main) */
+  background: linear-gradient(180deg, #fff7fb 0%, #fffdf8 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #6b2c2c;
+}
+
+/* SLIDE BASE */
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide.fade-out {
+  opacity: 0;
+  transform: translateY(-40px);
+}
+
+.slide.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Specific slide backgrounds */
+#delivery-slide, #package-slide {
+  /* gradient on top with a low alpha so image shows through but remains legible */
+  background-image: linear-gradient(180deg, rgba(255,247,251,0.25), rgba(255,253,248,0.2)), url("assets/background-intro.jpg");
+  background-size: cover, cover;
+  background-position: center center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+#bouquet-slide {
+  /* use the main image directly — no tint so the image reads clearly */
+  background-image: url("assets/background-main.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  animation: bouquet-bg-breath 10s ease-in-out infinite;
+  position: relative;
+  z-index: 12; /* ensure it's above other slides */
+}
+#bouquet-slide::before {
+  content: none; /* remove tint overlay */
+}
+
+/* card to lift content on intro slides */
+.card {
+  background: rgba(255,255,255,0.92);
+  padding: 1.6rem 1.6rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  width: min(720px, 92%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.card .box-wrapper { margin-bottom: 0.6rem; }
+
+/* ensure the active slide is on top */
+.slide { z-index: 0; }
+.slide.active { z-index: 20; }
+@keyframes bouquet-bg-breath {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.02); filter: brightness(1.03); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* STATE 1 */
+.snoopy {
+  width: 180px;
+  max-width: 60%;
+}
+
+.delivery-text {
+  font-size: 1.2rem;
+  opacity: 0.85;
+}
+
+.delivery-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 20px;
+  border: none;
+  background: #f4b6c2;
+  cursor: pointer;
+}
+
+/* STATE 2 */
+.package-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* keeps different image aspect ratios contained within the same box */
+  cursor: pointer;
+  animation: popIn 0.6s ease forwards, package-bob 4s ease-in-out 1s infinite;
+  transform-origin: center;
+  display: block;
+}
+
+.open-btn {
+  padding: 0.6rem 1.6rem;
+  border-radius: 20px;
+  border: none;
+  background: #f4b6c2;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.open-btn:hover {
+  transform: scale(1.05);
+}
+
+/* MICRO ANIMATION */
+@keyframes popIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes package-bob {
+  0% { transform: translateY(0); }
+  25% { transform: translateY(-0.8vmin); }
+  50% { transform: translateY(0); }
+  75% { transform: translateY(0.6vmin); }
+  100% { transform: translateY(0); }
+}
+
+/* BOX WRAPPER */
+.box-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Responsive square container so open/closed package images occupy the same area */
+  --pkg-size: clamp(140px, 28vw, 220px);
+  width: var(--pkg-size);
+  height: var(--pkg-size);
+}
+
+/* GLOW EFFECT */
+.glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(255,215,150,0.6), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.glow.active {
+  opacity: 1;
+}
+
+/* OPENING ANIMATION */
+.package-img.opening {
+  animation: openBox 0.4s ease forwards;
+}
+
+@keyframes openBox {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+/* EXIT ANIMATION */
+.slide.exit {
+  animation: exitZoom 0.8s ease forwards;
+}
+
+/* --- Cute extras --- */
+.snoopy {
+  animation: bob 3.2s ease-in-out infinite;
+}
+.delivery-text {
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-shadow: 0 0.2vmin 0.6vmin rgba(183,28,28,0.06);
+}
+.delivery-btn, .open-btn {
+  background: linear-gradient(180deg,#ffd6e1,#f4b6c2);
+  box-shadow: 0 6px 18px rgba(183,28,28,0.08);
+  color: #670e0e;
+  font-weight: 600;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+.delivery-btn:hover, .open-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 12px 26px rgba(183,28,28,0.12);
+}
+
+@keyframes bob {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-1.4vmin); }
+  100% { transform: translateY(0); }
+}
+
+/* floating emojis (hearts, sparkles) */
+@keyframes float-up {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-45vh) scale(1.1); opacity: 0; }
+}
+.floating-emoji {
+  position: fixed;
+  pointer-events: none;
+  font-size: 1.6rem;
+  z-index: 3000;
+  animation: float-up var(--dur, 3200ms) cubic-bezier(.2,.85,.3,1) forwards;
+  filter: drop-shadow(0 0.2vmin rgba(0,0,0,0.08));
+}
+
+/* bouquet sparkles */
+@keyframes bouquet-breathe {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+
+
+@keyframes exitZoom {
+  to {
+    opacity: 0;
+    transform: scale(1.1);
+  }
+}
+
+
+/* STATE 4: BOUQUET */
+/* Background is set above - no gradient override needed */
+
+/* Bouquet text sizes — edit these values to change text size */
+.bouquet-text {
+  /* Greeting font: RoyalBrand. Adjust `font-size` to change heading size. */
+  font-family: 'RoyalBrand', serif;
+  font-size: 2.50rem; /* change this value to make the greeting larger/smaller */
+  margin-bottom: 1.5rem;
+  text-align: center;
+  min-height: 1.5em;
+}
+
+.bouquet-message {
+  /* Message font: RoyalBrand. Adjust `font-size` to change message size. */
+  font-family: 'RoyalBrand', serif;
+  font-size: 1.50rem; /* change this value to make the message larger/smaller */
+  line-height: 1.6;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  padding: 0 3rem;
+  min-height: 3.2em;
+}
+
+.bouquet-img {
+  width: 260px;
+  max-width: 75%;
+  opacity: 0;
+  animation: bouquetFadeIn 5s ease 8.5s forwards, bouquet-breathe 6s ease-in-out 10s infinite;
+}
+
+/* Animations */
+@keyframes bouquetFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* BGM toggle button (appears when autoplay is blocked) */
+.bgm-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  display: none; /* hidden by default, shown when needed */
+  align-items: center;
+  justify-content: center;
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(180deg,#ffd6e1,#f4b6c2);
+  box-shadow: 0 6px 18px rgba(183,28,28,0.08);
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+.bgm-toggle:focus { outline: 2px solid rgba(103,14,14,0.12); }
+
+@keyframes typingText1 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+} 
+
+@keyframes typingText2 {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}

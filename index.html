@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delivery 📦</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- STATE 1 -->
+  <section id="delivery-slide" class="slide active">
+    <div class="card">
+      <img src="assets/snoopy.gif" class="snoopy" />
+      <p class="delivery-text">You’ve got a delivery!</p>
+      <button class="delivery-btn">Receive delivery</button>
+    </div>
+  </section>
+
+  <!-- STATE 2 / 3 -->
+  <section id="package-slide" class="slide hidden">
+    <div class="card">
+      <div class="box-wrapper">
+        <div class="glow"></div>
+
+        <img
+          src="assets/closed-package.png"
+          alt="Closed package"
+          class="package-img"
+          id="box-img"
+        />
+      </div>
+
+      <button class="open-btn">Open package</button>
+    </div>
+  </section>
+
+  
+  <!-- STATE 4: BOUQUET -->
+  <section id="bouquet-slide" class="slide hidden">
+    <p class="bouquet-text">Good morning!</p>
+    <p class="bouquet-message">sending you some 'just because' roses to brighten your day. may today bring you little moments of joy and calm.</p>
+
+    <img
+      src="assets/bouquet.gif"
+      alt="Bouquet of flowers"
+      class="bouquet-img"
+    />
+  </section>
+
+  <!-- OPTIONAL SOUND -->
+  <audio id="open-sound" src="open.mp3" preload="auto"></audio>
+  <audio id="bgm" src="assets/bgm.mp3" preload="auto" loop></audio>
+  <!-- visible control shown when autoplay is blocked or user wants to toggle music -->
+  <button id="bgm-toggle" class="bgm-toggle" aria-pressed="false" title="Play background music">🔊</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
