@@ -291,7 +291,7 @@ body {
   /* Greeting font: RoyalBrand. Adjust `font-size` to change heading size. */
   font-family: 'RoyalBrand', serif;
   font-size: 2rem; /* change this value to make the greeting larger/smaller */
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   text-align: center;
   min-height: 1.5em;
 }
@@ -299,7 +299,7 @@ body {
 .bouquet-message {
   /* Message font: RoyalBrand. Adjust `font-size` to change message size. */
   font-family: 'RoyalBrand', serif;
-  font-size: 1rem; /* change this value to make the message larger/smaller */
+  font-size: 0.7rem; /* change this value to make the message larger/smaller */
   line-height: 1.6;
   text-align: center;
   max-width: 600px;
