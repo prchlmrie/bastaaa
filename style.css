@@ -297,16 +297,15 @@ body {
 }
 
 .bouquet-message {
-  /* Message font: RoyalBrand. Adjust `font-size` to change message size. */
   font-family: 'RoyalBrand', serif;
-  font-size: 0.7rem; /* change this value to make the message larger/smaller */
+  font-size: clamp(1.1rem, 4vw, 1.6rem);
   line-height: 1.6;
   text-align: center;
   max-width: 600px;
   margin: 0 auto 2rem;
-  padding: 0 3rem;
-  min-height: 3.2em;
+  padding: 0 2rem;
 }
+
 
 .bouquet-img {
   width: 260px;
