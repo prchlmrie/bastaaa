@@ -34,8 +34,12 @@ body {
 
 .slide {
   position: fixed;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   inset: 0;
   width: 100vw;
+  height: 100vh;
   height: 100svh;
   overflow: hidden;
   display: flex;
