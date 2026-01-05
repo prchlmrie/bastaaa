@@ -291,7 +291,7 @@ body {
   /* Greeting font: RoyalBrand. Adjust `font-size` to change heading size. */
   font-family: 'RoyalBrand', serif;
   font-size: 2rem; /* change this value to make the greeting larger/smaller */
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-align: center;
   min-height: 1.5em;
 }
@@ -303,9 +303,8 @@ body {
   text-align: center;
   max-width: 600px;
   margin: 0 auto 2rem;
-  padding: 0 2rem;
+  padding: 2rem 2rem;
 }
-
 
 .bouquet-img {
   width: 260px;
