@@ -293,7 +293,7 @@ body {
   font-size: 2rem; /* change this value to make the greeting larger/smaller */
   margin-bottom: 1.5rem;
   text-align: center;
-  min-height: 1.5em;
+  min-height: 3rem;
 }
 
 .bouquet-message {
