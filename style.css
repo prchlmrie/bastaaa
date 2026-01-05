@@ -294,6 +294,8 @@ body {
   margin-bottom: 0.2rem;
   text-align: center;
   min-height: 5rem;
+  padding-top: 2rem;
+  margin-top: 2rem;
 }
 
 .bouquet-message {
